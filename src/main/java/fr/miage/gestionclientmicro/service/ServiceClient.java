@@ -13,8 +13,9 @@ public class ServiceClient {
     @Autowired
     private RepoClient repoClient;
 
-    public void createClient(Client client){
+    public Client createClient(Client client){
         repoClient.save(client);
+        return client;
     }
 
     public Client getClientById(String id) throws Exception {
