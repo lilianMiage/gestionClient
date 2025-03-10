@@ -1,12 +1,24 @@
 services:
-  # Service MySQL
-    mongodb:
-      image: mongo:6-jammy
-      ports:
-        - '27017:27017'
-      volumes:
-        - dbdata6:/data/db
+  spring_app:
+    build: .
+    container_name: spring_app
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mongodb
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:password@mongodb:27017/mydatabase?authSource=admin
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb_data:/data/db
 
 volumes:
-  dbdata6:
-
+  mongodb_data:

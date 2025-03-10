@@ -1,25 +1,25 @@
 package fr.miage.gestionclientmicro.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Builder
+@Jacksonized
+@Document(collection = "client")
 public class Client {
 
     @Id
-    private Long id;
+    private String id;
 
     private String nom;
 
     private String prenom;
-
-    private List<Comptes> comptes;
 }
